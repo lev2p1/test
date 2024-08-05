@@ -28,12 +28,13 @@ class ProductImport implements ToCollection, WithHeadingRow
         $path = ltrim($path);
         try{
             $file = fopen($path, 'r');
+            Storage::disk('public')->put($name, $file);
         }
         catch(Exception $exception){
             dump($exception);
             $file = '';
         }
-            Storage::disk('public')->put($name, $file);
+            
             $img->value = $name;
             $img->type = $type;
             $img->product_id = $id;

@@ -20,24 +20,6 @@ window.onload = function() {
         handleGesure();
     }, false); 
     
-    function handleGesure() {
-        var swiped = 'swiped: ';
-        if (touchendX < touchstartX) {
-            alert(swiped + 'left!');
-        }
-        if (touchendX > touchstartX) {
-            alert(swiped + 'right!');
-        }
-        if (touchendY < touchstartY) {
-            alert(swiped + 'down!');
-        }
-        if (touchendY > touchstartY) {
-            alert(swiped + 'left!');
-        }
-        if (touchendY == touchstartY) {
-            alert('tap!');
-        }
-    }
 }
 
 var imageIndex = 1
@@ -87,3 +69,5 @@ function changeImage(n) {
         slides[imageIndex-1].classList.add('active-img')
     }
 }
+
+

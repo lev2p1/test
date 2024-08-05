@@ -5,22 +5,29 @@ namespace Tests\Feature;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
+use App\Imports\ProductImport;
+use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Storage;
 
 class ImportTest extends TestCase
 {
     /**
      * A basic feature test example.
      */
-    public function test_example(): void
+    public function test_download_image(): void
     {
-        $response = $this->post('/test/images/store', [
-            '_token' => csrf_token(),
-            'path' => 'http://catalog.collant.ru/pics/SNL-504038_p.jpg',
-            'name' => 'testImage.png',
-            'id' => 'a217f669-aa1a-11ee-0a80-00380034176d',
-            'type' => 'test'
-        ]);
+        $result = ProductImport::download_image(
+            'http://catalog.collant.ru/pics/SNL-504038_p.jpg',
+            'testImage.png',
+            'a217f669-aa1a-11ee-0a80-00380034176d',
+            'test'
+        );
 
-        $response->assertStatus(201);
+        $this->assertEquals(201, $result->getStatusCode());
+    }
+
+    public function test_function_import(){
+        //Excel::fake();
+        // Excel::assertImported('vjHi6wA2YYj6nH57v27DWyPYAcpH5kRK0S0XQAFv.xlsx', 'public'); 
     }
 }

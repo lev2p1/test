@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Models\Image;
 use App\Models\Add;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class ProductController extends Controller
 {
@@ -20,16 +21,15 @@ class ProductController extends Controller
     }
 
     public function store(Request $request){
-        $data = $request->validate([
-            'file' => 'required|mimes:xlsx'
-        ]);
-
-        $file = $request->file('file')->storePublicly();
-
-        ini_set('memory_limit', '-1');
-        Excel::import(new ProductImport, Storage::path($file));
-        $elements = Product::all();
-        return view('main', compact('elements'));
+ini_set('memory_limit', '-1');
+        $file = base64_decode($request['file']);
+        $name = Str::random() . '.xlsx';
+        Storage::disk('public')->put($name, $file);
+        
+        
+        
+        Excel::import(new ProductImport(), Storage::path($name));
+        return response(201);
     }
 
     public function import(){
