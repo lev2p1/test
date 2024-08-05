@@ -208,8 +208,8 @@ a{
 	padding: 10px 20px;
 	box-sizing: border-box;
 	border: none;
-	margin: 0;
 	transition: 0.2s;
+    width: 100%;
 }
 .input-file input[type=file] {
 	position: absolute;

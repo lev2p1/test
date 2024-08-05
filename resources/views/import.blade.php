@@ -8,7 +8,7 @@
 
     @vite(['resources/css/app.css', 'resources/scss/app.scss', 'resources/js/app.js'])
 </head>
-<div>
+<div class='form-container'>
     <form method="post" id='form' action='/product/import' enctype="multipart/form-data">
         @csrf
         <label class="input-file">
