@@ -10,5 +10,7 @@ class Product extends Model
     public $timestamps = false;
     protected $fillable = ['id'];
 
+    public $incrementing = false;
+
     use HasFactory;
 }

@@ -1,0 +1,186 @@
+:root {
+    --bg: #ffffff;
+    --text-colour: #000000;
+    --blue: #008CFF;
+    --corpblue: #008CFF;
+    --fade: rgba(0, 0, 0, 0.03);
+    --headerbg: hsla(0,0%,98%,.2);
+    --border: #11111143;
+    --tagged-text: #111111c1;
+    --corpyellow: #FBDF05;
+    --constcorpblue: #002747;
+    --bgcontrast: #181818;
+    --textcontrast: #ffffff;
+    --custom-page: rgba(228, 228, 228);
+    --input-color: rgb(133, 133, 133);
+    --menu-sub: #E6EBE6;
+    --scrollbar-thumb: #00000033;
+    --scrollbar-thumb-hover: #00000066;
+    --shadow-border: rgba(0,0,0,.05);
+    --shadow: rgba(0,0,0,.1);
+    --shadow-contrast: rgba(255,255,255,.1);
+    --red-bg: rgba(255, 0, 0, 0.4);
+    --red-border: #ff82828c;
+    --red-text: rgba(200, 0, 0);
+}
+.dark {
+    --shadow-contrast: rgba(0,0,0,.1);
+    --shadow-border: rgba(255,255,255,.05);
+    --shadow: rgba(255,255,255,.1);
+    --scrollbar-thumb: #ffffff25;
+    --scrollbar-thumb-hover: #ffffff50;
+    --textcontrast: #000000;
+    --bgcontrast: #ffffff;
+    --bg: #101010;
+    --text-colour: #ffffff;
+    --corpblue: #002747;
+    --fade: rgba(255, 255, 255, 0.01);
+    --headerbg: rgba(25,25,25,.6);
+    --border: rgba(93,96,102,.6);
+    --custom-page: rgba(25,25,25,.6);
+    --menu-sub: rgb(21, 22, 23);
+    --tagged-text: rgb(138, 138, 138);
+    --border: rgba(178,179,189,.6);
+}
+
+.left {
+    text-align: left;
+}
+.right {
+    text-align: right;
+}
+.center {
+    text-align: center;
+}
+.section-title {
+    font-size: 120px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    transition: ease-in-out 0.5s;
+    font-weight: 700;
+}
+.prop-section-title {
+    font-size: 72px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    transition: ease-in-out 0.5s;
+    font-weight: 700;
+}
+.prop-section-subtitle {
+    font-size: 40px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    transition: ease-in-out 0.5s;
+    font-weight: 700;
+}
+.mb10 {
+    margin-bottom: 20px;
+}
+.text-blue {
+    color: var(--blue)
+}
+.section {
+    margin: 0px 15% 64px 15%;
+}
+.nsection {
+    margin: 0px 15% 0 15%;
+}
+.w100 {
+    width: 100%;
+}
+.w50 {
+    width: 50%;
+}
+.h100 {
+    height: 100%;
+}
+.h50 {
+    height: 50%;
+}
+.subtitle {
+    font-size: 40px;
+    font-weight: 500;
+    margin-top: 12px;
+    margin-bottom: 48px;
+}
+.relative {
+    position: relative;
+}
+.block {
+    display: block;
+}
+.flex {
+    display: flex;
+}
+.flex-row {
+    flex-direction: row;
+}
+.flex-col {
+    flex-direction: column;
+}
+.vert-center {
+    align-items: center;
+}
+.horiz-center {
+    justify-content: center;
+}
+.align-base {
+    align-items: flex-end;
+}
+.flex-right {
+    justify-content: flex-end;
+}
+.flex-left {
+    justify-content: flex-start;
+}
+.text-normal {
+    color: var(--text-colour)
+}
+.flex-wrap {
+    flex-wrap: wrap;
+}
+.flex-nowrap {
+    flex-wrap: nowrap;
+}
+.grid {
+    display: grid;
+}
+.no-bottom-margin {
+    margin-bottom: 0px;
+}
+.nounderline {
+    text-decoration: none;
+}
+.hidden {
+    visibility: hidden;
+    display: none !important;
+}
+.visible {
+    visibility: visible;
+}
+option {
+    background: var(--bg);
+}
+select {
+    background: none;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    font-size: 1.25em;
+    font-weight: 600;
+    width: 400px;
+}
+@media screen and (max-width: 500px){
+    .section {
+        margin: 0px 5% 64px 5%;
+    }
+    .nsection {
+        margin: 0px 5% 0px 5%;
+    }
+}
+.mob-section {
+    padding: 0px 15% 0px 15%;
+}
+.flex-jsbetween {
+    justify-content: space-between;
+}
