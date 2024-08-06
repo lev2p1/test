@@ -61,34 +61,37 @@ class ProductImport implements ToCollection, WithHeadingRow
     {
         ini_set('max_execution_time', 1800);
         foreach($collection as $key => $value){
+            if(is_null((new Product())::find($value['uuid']))){
+
             
-            if(isset($value) && !empty($value['uuid']) && !empty($value['naimenovanie']) && !empty($value['vnesnii_kod']) && !empty($value['cena_cena_prodazi']) && !empty($value['minimalnaia_cena'])){
-                $prod = new Product;
-                $prod->id = $value['uuid'];
-                $prod->name = $value['naimenovanie'];
-                $prod->external_code = $value['vnesnii_kod'];
-                $prod->description = $value['opisanie'];
-                $prod->price = (float)$value['cena_cena_prodazi'];
-                $prod->discount = ((int) $value['cena_cena_prodazi'] - (int) $value['minimalnaia_cena']) / (int) $value['cena_cena_prodazi'] * 100;
-                $prod->save();
-                
-            foreach($value as $k => $v){
-                if(!in_array($k, self::$main_keys)){
-                    $add = new Add;
-                    $add->value = json_encode(array($k => $v), JSON_UNESCAPED_UNICODE);
-                    $add->product_id = $value['uuid'];
-                    $add->save();
+                if(isset($value) && !empty($value['uuid']) && !empty($value['naimenovanie']) && !empty($value['vnesnii_kod']) && !empty($value['cena_cena_prodazi']) && !empty($value['minimalnaia_cena'])){
+                    $prod = new Product;
+                    $prod->id = $value['uuid'];
+                    $prod->name = $value['naimenovanie'];
+                    $prod->external_code = $value['vnesnii_kod'];
+                    $prod->description = $value['opisanie'];
+                    $prod->price = (float)$value['cena_cena_prodazi'];
+                    $prod->discount = ((int) $value['cena_cena_prodazi'] - (int) $value['minimalnaia_cena']) / (int) $value['cena_cena_prodazi'] * 100;
+                    $prod->save();
+
+                foreach($value as $k => $v){
+                    if(!in_array($k, self::$main_keys)){
+                        $add = new Add;
+                        $add->value = json_encode(array($k => $v), JSON_UNESCAPED_UNICODE);
+                        $add->product_id = $value['uuid'];
+                        $add->save();
+                    }
+                }
+
+                $res = self::download_image($value['dop_pole_ssylka_na_upakovku'], Str::random() . '.png', $value['uuid'], 'upacovka');
+
+                foreach(explode(',', $value['dop_pole_ssylki_na_foto']) as $photo){
+                    $res = self::download_image($photo, Str::random() . '.png', $value['uuid'], 'photo');
                 }
             }
-
-            $res = self::download_image($value['dop_pole_ssylka_na_upakovku'], Str::random() . '.png', $value['uuid'], 'upacovka');
-
-            foreach(explode(',', $value['dop_pole_ssylki_na_foto']) as $photo){
-                $res = self::download_image($photo, Str::random() . '.png', $value['uuid'], 'photo');
-            }
-            }
-            
         }
+    }
+    
         return new Response(201); 
     }
 }
