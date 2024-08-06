@@ -23,26 +23,40 @@ class ProductImport implements ToCollection, WithHeadingRow
     */
     protected static array $main_keys = array('uuid', 'naimenovanie', 'vnesnii_kod', 'cena_cena_prodazi', 'minimalnaia_cena', 'dop_pole_ssylka_na_upakovku', 'dop_pole_ssylki_na_foto');
     
+
+    /* 
+        Входные параметры:
+            $path - Url адрес страницы с которой будет происходить загрузка
+            $name - Будущее название файла
+            $id - Первичный ключ продукта, к которому будет прикреплена картинка
+            $type - Тип картинки ('upacovka', 'photo') - ('облжка', 'доп фотографии')
+            Функция качает и записывает изображение в storage/app/public, после создает о нем запись в таблице
+            При ошибке функция не выполнит ничего.
+    */
     public static function download_image($path, $name, $id, $type) : Response{
         $img = new Image;
         $path = ltrim($path);
         try{
             $file = fopen($path, 'r');
             Storage::disk('public')->put($name, $file);
-        }
-        catch(Exception $exception){
-            dump($exception);
-            $file = '';
-        }
-            
             $img->value = $name;
             $img->type = $type;
             $img->product_id = $id;
             $img->save();
+        }
+        catch(Exception $exception){
+            return new Response(400);
+        }
+            
+            
         return new Response(201);
     }
 
 
+    /* 
+        Функция парсит таблицу эксель и создает записи продуктов в базу данных
+        При ошибке не будет создано ничего
+    */
     public function collection(Collection $collection)
     {
         ini_set('max_execution_time', 1800);

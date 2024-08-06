@@ -1,3 +1,10 @@
+/*
+    Аякс-запрос на импорт данных из эксель таблицы
+    Передает на сервер токен и файл, закодированный в base64
+    Может выполняться долго из-за загрузок картинок на стороне сервера
+    при успешном выполнении выводит ответ от сервера в консоль
+*/
+
 async function awaitResponse() {
     var data = {};
     const reader = new FileReader();
@@ -27,15 +34,20 @@ async function awaitResponse() {
 
 
 $(document).ready(function(){
+    // Функция меняет текст при изменении выбранного файла 
     $('.input-file input[type=file]').on('change', function(){
         let file = this.files[0];
         $(this).next().html(file.name);
            
     });
 
-
+    /*
+        Функции кнопки
+        При нажатии вызывает аякс запрос
+    */ 
     const button = document.querySelector('.button');
     const submit = document.querySelector('.submit');
+
 
     function toggleClass() {
         
